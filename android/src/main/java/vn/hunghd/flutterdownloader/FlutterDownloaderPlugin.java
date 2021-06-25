@@ -166,6 +166,7 @@ public class FlutterDownloaderPlugin implements MethodCallHandler, FlutterPlugin
         String savedDir = call.argument("saved_dir");
         String filename = call.argument("file_name");
         String headers = call.argument("headers");
+        String extendedFiled = call.argument("extended_filed");
         boolean showNotification = call.argument("show_notification");
         boolean openFileFromNotification = call.argument("open_file_from_notification");
         boolean requiresStorageNotLow = call.argument("requires_storage_not_low");
@@ -174,7 +175,7 @@ public class FlutterDownloaderPlugin implements MethodCallHandler, FlutterPlugin
         String taskId = request.getId().toString();
         result.success(taskId);
         sendUpdateProgress(taskId, DownloadStatus.ENQUEUED, 0);
-        taskDao.insertOrUpdateNewTask(taskId, url, DownloadStatus.ENQUEUED, 0, filename, savedDir, headers, showNotification, openFileFromNotification);
+        taskDao.insertOrUpdateNewTask(taskId, url, DownloadStatus.ENQUEUED, 0, filename, savedDir, headers, showNotification, openFileFromNotification, extendedFiled);
     }
 
     private void loadTasks(MethodCall call, MethodChannel.Result result) {
@@ -188,6 +189,7 @@ public class FlutterDownloaderPlugin implements MethodCallHandler, FlutterPlugin
             item.put("url", task.url);
             item.put("file_name", task.filename);
             item.put("saved_dir", task.savedDir);
+            item.put("extended_filed", task.extendedFiled);
             item.put("time_created", task.timeCreated);
             array.add(item);
         }
@@ -206,6 +208,7 @@ public class FlutterDownloaderPlugin implements MethodCallHandler, FlutterPlugin
             item.put("url", task.url);
             item.put("file_name", task.filename);
             item.put("saved_dir", task.savedDir);
+            item.put("extended_filed", task.extendedFiled);
             item.put("time_created", task.timeCreated);
             array.add(item);
         }

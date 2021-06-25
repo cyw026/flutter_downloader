@@ -3,17 +3,21 @@ package vn.hunghd.flutterdownloader;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
+import android.util.Log;
+
+import java.io.File;
 
 import vn.hunghd.flutterdownloader.TaskContract.TaskEntry;
 
 public class TaskDbHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "download_tasks.db";
+    public static final int DATABASE_VERSION = 2;
 
     private static TaskDbHelper instance = null;
 
     private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + TaskEntry.TABLE_NAME + " (" +
+            "CREATE TABLE IF NOT EXISTS " + TaskEntry.TABLE_NAME + " (" +
                     TaskEntry._ID + " INTEGER PRIMARY KEY," +
                     TaskEntry.COLUMN_NAME_TASK_ID + " VARCHAR(256), " +
                     TaskEntry.COLUMN_NAME_URL + " TEXT, " +
@@ -26,6 +30,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
                     TaskEntry.COLUMN_NAME_RESUMABLE + " TINYINT DEFAULT 0, " +
                     TaskEntry.COLUMN_NAME_SHOW_NOTIFICATION + " TINYINT DEFAULT 0, " +
                     TaskEntry.COLUMN_NAME_OPEN_FILE_FROM_NOTIFICATION + " TINYINT DEFAULT 0, " +
+                    TaskEntry.COLUMN_NAME_EXTENDED_FILED + " TEXT, " +
                     TaskEntry.COLUMN_NAME_TIME_CREATED + " INTEGER DEFAULT 0"
                     + ")";
 

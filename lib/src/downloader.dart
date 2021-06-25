@@ -67,6 +67,7 @@ class FlutterDownloader {
       @required String savedDir,
       String fileName,
       Map<String, String> headers,
+        String extendedFiled,
       bool showNotification = true,
       bool openFileFromNotification = true,
       bool requiresStorageNotLow = true}) async {
@@ -88,6 +89,7 @@ class FlutterDownloader {
         'saved_dir': savedDir,
         'file_name': fileName,
         'headers': headerBuilder.toString(),
+        'extended_filed': extendedFiled,
         'show_notification': showNotification,
         'open_file_from_notification': openFileFromNotification,
         'requires_storage_not_low': requiresStorageNotLow,
@@ -119,6 +121,7 @@ class FlutterDownloader {
               url: item['url'],
               filename: item['file_name'],
               savedDir: item['saved_dir'],
+              extendedFiled: item['extended_filed'],
               timeCreated: item['time_created']))
           .toList();
     } on PlatformException catch (e) {
@@ -162,6 +165,7 @@ class FlutterDownloader {
               url: item['url'],
               filename: item['file_name'],
               savedDir: item['saved_dir'],
+              extendedFiled: item['extended_filed'],
               timeCreated: item['time_created']))
           .toList();
     } on PlatformException catch (e) {
